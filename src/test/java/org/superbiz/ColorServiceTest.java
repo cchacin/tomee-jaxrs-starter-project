@@ -21,11 +21,9 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.runner.RunWith;
 
-import com.github.cchacin.cucumber.steps.RestSteps;
-
+import cucumber.api.CucumberOptions;
+import cucumber.api.SnippetType;
 import cucumber.runtime.arquillian.ArquillianCucumber;
-import cucumber.runtime.arquillian.api.Features;
-import cucumber.runtime.arquillian.api.Glues;
 
 /**
  * Arquillian will start the container, deploy all @Deployment bundles, then run all the @Test methods.
@@ -38,8 +36,12 @@ import cucumber.runtime.arquillian.api.Glues;
  * of a class for another allowing for easy mocking.
  *
  */
-@Glues({RestSteps.class})
-@Features({"features/colorservice.feature"})
+@CucumberOptions(snippets = SnippetType.CAMELCASE,
+                 strict = true,
+                 glue = {"classpath:"},
+                 features = {"classpath:features"},
+                 plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"}
+)
 @RunWith(ArquillianCucumber.class)
 public class ColorServiceTest {
 
@@ -54,6 +56,8 @@ public class ColorServiceTest {
      */
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "test-app.war").addClasses(ColorService.class, Color.class);
+        return ShrinkWrap.create(WebArchive.class)
+                         .addClasses(ColorService.class, Color.class)
+                         .addPackages(true, "org.tomitribe.beryllium");
     }
 }

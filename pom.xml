@@ -52,16 +52,21 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.cchacin</groupId>
-      <artifactId>cucumber-common-steps</artifactId>
-      <version>0.2.11</version>
+      <groupId>org.tomitribe</groupId>
+      <artifactId>beryllium</artifactId>
+      <version>0.2.13</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.github.cukespace</groupId>
       <artifactId>cukespace-core</artifactId>
-      <version>1.6.0</version>
+      <version>${cukespace.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.arquillian.test</groupId>
+      <artifactId>arquillian-test-impl-base</artifactId>
+      <version>1.1.9.Final</version>
     </dependency>
   </dependencies>
 
@@ -82,6 +87,7 @@
   <properties>
     <tomee.version>1.7.3</tomee.version>
     <openejb.javaee.api>6.0-6</openejb.javaee.api>
+    <cukespace.version>1.6.1</cukespace.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <failOnMissingWebXml>false</failOnMissingWebXml>
     <maven.compiler.target>1.7</maven.compiler.target>
